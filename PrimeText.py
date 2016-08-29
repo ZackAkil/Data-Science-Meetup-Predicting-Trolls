@@ -52,39 +52,27 @@ class PrimeText:
         fitPrime = primes[1:len(self.cleanedDictionary)+1,1]
         self.indexedDictionary = dict(np.c_[self.cleanedDictionary,fitPrime])
         print('Indexed dictionary')
-#
-#	def indexComments(self,comments):
-#         output = []
-#         for comment in comments:
-#             prod = 1
-#             words = comment.split(' ')
-#             for word in words:
-#                 if word in self.indexedDictionary:
-#                     prod *= int(self.indexedDictionary[word])
-#                 output.append(prod)
-#        self.indexedRecords = output
 
-#	def indexDictionary(self, dictionary):
-#		primes = np.genfromtxt ('primes.csv', delimiter=",").astype(int)
-#		fitPrime = primes[1:len(dictionary)+1,1]
-#		indexedDictionary = dict(np.c_[dictionary,primeFit])
-#
-#	def indexComments(self, comments):
-#		for comment in comments:
-#			prod = 1
-#			words = comment.split(' ')
-#			for word in words:
-#				if word in indexedDictionary:
-#					prod *= int(indexedDictionary[word])
-#			output.append(prod)
-#		indexedRecords = output
+    def indexComments(self):
+        output = []
+        for comment in self.cleanedRecords:
+            prod = 1
+            words = comment.split(' ')
+            for word in words:
+                if word in self.indexedDictionary:
+                    prod *= int(self.indexedDictionary[word])
+            output.append(prod)
+        self.indexedRecords = output
+        print('Indexed comments')
 
-#	def convertWordsToProduct(words):
-#		output = 1
-#		for word in words:
-#			if word in indexedDictionary:
-#				output *= int(indexedDictionary[word])
-#		return output
+
+    def convertWordsToProduct(self,words):
+        output = 1
+        for word in words:
+            word = self.st.stem(word).lower()
+            if word in self.indexedDictionary:
+                output *= int(self.indexedDictionary[word])
+        return output
 #
 #	def searchByPrimeFact(searchProduct):
 #		return  (np.mod(indexedRecords, searchProduct) == 0)
