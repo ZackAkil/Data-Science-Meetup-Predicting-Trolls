@@ -23,14 +23,13 @@ pt.indexComments()
 keyText = []
 keyCount = []
 for key, value in pt.indexedDictionary.iteritems():
-    print(key)
     c = pt.countInRecords([key])
     keyText.append(key)
     keyCount.append(c)
     
 s1 = pa.Series(keyCount,index=keyText)
 
-sortedS1  = s1.sort_values(ascending= False)
+sortedS1  = s1.sort_values(ascending= False)[:100]
 
 sortedS1.plot.bar()
     

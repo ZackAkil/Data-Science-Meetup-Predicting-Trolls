@@ -12,8 +12,8 @@ class PrimeText:
     cleanedRecords = []
     cleanedDictionary = []
     
-    st = LancasterStemmer()
-     
+    st = LancasterStemmer()   
+    
     def cleanData(self,records):
          output = []
          recordsChecked = 0
