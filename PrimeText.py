@@ -28,19 +28,22 @@ class PrimeText:
                          if word.isalpha():
                              cleanSentence += self.st.stem(spell(word.lower())) + ' '
              if cleanSentence:
-                 output.append(cleanSentence)  
+                 output.append(cleanSentence.strip())  
          sys.stdout.flush()
          self.cleanedRecords = output
     
 
-#    def assembleDictionary(self, textList):
-#        st = LancasterStemmer()
-#        uniqueWords = []
-#        for text in textList:
-#            for word in text.split(' '):
-#                if st.stem(spell(word.lower())) not in uniqueWords:
-#                    uniqueWords.append(word)
-#        return uniqueWords  
+    def assembleDictionary(self):
+        uniqueWords = []
+        recordsChecked = 0
+        for text in self.cleanedRecords:
+            recordsChecked += 1
+            sys.stdout.write("\rRecords checked : %i" % recordsChecked)
+            for word in text.split(' '):
+                if word not in uniqueWords:
+                    uniqueWords.append(word)
+        sys.stdout.flush()
+        self.cleanedDictionary = uniqueWords  
         
         #	def indexDictionary(self,dictionary):
 #         primes = np.genfromtxt ('primes.csv', delimiter=",").astype(int)

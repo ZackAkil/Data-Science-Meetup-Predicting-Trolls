@@ -9,11 +9,11 @@ from PrimeText import PrimeText
 
 pt = PrimeText()
 ytData = pa.read_csv("utube.csv",encoding ='ISO-8859-1')
-comments = ytData['comment'][:1000]
+comments = ytData['comment'][:30]
 
 
 pt.cleanData(comments)
-#pt.assembleDictionary()
+pt.assembleDictionary()
 #
 #pt.indexDictionary()
 #pt.indexComments()
