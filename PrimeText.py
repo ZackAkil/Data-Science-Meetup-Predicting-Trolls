@@ -73,10 +73,17 @@ class PrimeText:
             if word in self.indexedDictionary:
                 output *= int(self.indexedDictionary[word])
         return output
-#
-#	def searchByPrimeFact(searchProduct):
-#		return  (np.mod(indexedRecords, searchProduct) == 0)
-#
-#	def find(words):
-#		prod = convertWordsToProduct(words)
-#		return searchByPrimeFact(prod)
+
+    def searchByPrimeFact(self,searchProduct):
+        return  (np.mod(self.indexedRecords, searchProduct) == 0)
+
+    def find(self, words):
+        prod = self.convertWordsToProduct(words)
+        return self.searchByPrimeFact(prod)
+        
+    def findInRecords(self, words):
+        data = np.asarray(self.cleanedRecords)
+        return data[self.find(words)]
+        
+    def countInRecords(self, words):
+        return self.find(words).sum()
