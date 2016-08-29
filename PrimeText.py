@@ -29,6 +29,7 @@ class PrimeText:
                              cleanSentence += self.st.stem(spell(word.lower())) + ' '
              if cleanSentence:
                  output.append(cleanSentence.strip())  
+         sys.stdout.write("\n")
          sys.stdout.flush()
          self.cleanedRecords = output
     
@@ -42,6 +43,7 @@ class PrimeText:
             for word in text.split(' '):
                 if word not in uniqueWords:
                     uniqueWords.append(word)
+        sys.stdout.write("\n")
         sys.stdout.flush()
         self.cleanedDictionary = uniqueWords  
         
