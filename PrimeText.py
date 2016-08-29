@@ -1,25 +1,48 @@
+from __future__ import print_function
+import sys
 import numpy as np
 from nltk.stem.lancaster import LancasterStemmer
 from autocorrect import spell
-
+ 
 class PrimeText:
-
+    
     indexedDictionary = dict()
     indexedRecords = []
  
-    def hw(self):
-        print('sup')
-        
-    def assembleDictionary(self, textList):
-        st = LancasterStemmer()
-        uniqueWords = []
-        for text in textList:
-            for word in text.split(' '):
-                if st.stem(spell(word)) not in uniqueWords:
-                    uniqueWords.append(word)
-        return uniqueWords
+    cleanedRecords = []
+    cleanedDictionary = []
+    
+    st = LancasterStemmer()
+     
+    def cleanData(self,records):
+         output = []
+         recordsChecked = 0
+         for sentence in records:
+             recordsChecked += 1
+             sys.stdout.write("\rRecords cleaned : %i" % recordsChecked)
+             cleanSentence = ''
+             if len(sentence) < 200:
+                 words = sentence.split(' ')
+                 for word in words:
+                     if len(word) < 12:
+                         if word.isalpha():
+                             cleanSentence += self.st.stem(spell(word.lower())) + ' '
+             if cleanSentence:
+                 output.append(cleanSentence)  
+         sys.stdout.flush()
+         self.cleanedRecords = output
+    
 
-#	def indexDictionary(self,dictionary):
+#    def assembleDictionary(self, textList):
+#        st = LancasterStemmer()
+#        uniqueWords = []
+#        for text in textList:
+#            for word in text.split(' '):
+#                if st.stem(spell(word.lower())) not in uniqueWords:
+#                    uniqueWords.append(word)
+#        return uniqueWords  
+        
+        #	def indexDictionary(self,dictionary):
 #         primes = np.genfromtxt ('primes.csv', delimiter=",").astype(int)
 #         fitPrime = primes[1:len(dictionary)+1,1]
 #         self.indexedDictionary = dict(np.c_[dictionary,fitPrime])
@@ -34,17 +57,32 @@ class PrimeText:
 #                     prod *= int(self.indexedDictionary[word])
 #                 output.append(prod)
 #        self.indexedRecords = output
+
+#	def indexDictionary(self, dictionary):
+#		primes = np.genfromtxt ('primes.csv', delimiter=",").astype(int)
+#		fitPrime = primes[1:len(dictionary)+1,1]
+#		indexedDictionary = dict(np.c_[dictionary,primeFit])
 #
-#	def convertWordsToProduct(self,words):
+#	def indexComments(self, comments):
+#		for comment in comments:
+#			prod = 1
+#			words = comment.split(' ')
+#			for word in words:
+#				if word in indexedDictionary:
+#					prod *= int(indexedDictionary[word])
+#			output.append(prod)
+#		indexedRecords = output
+
+#	def convertWordsToProduct(words):
 #		output = 1
 #		for word in words:
-#			if word in self.indexedDictionary:
-#				output *= int(self.indexedDictionary[word])
+#			if word in indexedDictionary:
+#				output *= int(indexedDictionary[word])
 #		return output
 #
-#	def searchByPrimeFact(self,searchProduct):
-#		return  (np.mod(self.indexedRecords, searchProduct) == 0)
+#	def searchByPrimeFact(searchProduct):
+#		return  (np.mod(indexedRecords, searchProduct) == 0)
 #
-#	def find(self, words):
+#	def find(words):
 #		prod = convertWordsToProduct(words)
 #		return searchByPrimeFact(prod)
