@@ -15,6 +15,6 @@ comments = ytData['comment'][:30]
 pt.cleanData(comments)
 pt.assembleDictionary()
 #
-#pt.indexDictionary()
-#pt.indexComments()
+pt.indexDictionary()
+pt.indexComments()
 

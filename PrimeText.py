@@ -47,10 +47,11 @@ class PrimeText:
         sys.stdout.flush()
         self.cleanedDictionary = uniqueWords  
         
-        #	def indexDictionary(self,dictionary):
-#         primes = np.genfromtxt ('primes.csv', delimiter=",").astype(int)
-#         fitPrime = primes[1:len(dictionary)+1,1]
-#         self.indexedDictionary = dict(np.c_[dictionary,fitPrime])
+    def indexDictionary(self):
+        primes = np.genfromtxt ('prime10000.csv', delimiter=",").astype(int)
+        fitPrime = primes[1:len(self.cleanedDictionary)+1,1]
+        self.indexedDictionary = dict(np.c_[self.cleanedDictionary,fitPrime])
+        print('Indexed dictionary')
 #
 #	def indexComments(self,comments):
 #         output = []
