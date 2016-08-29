@@ -66,10 +66,11 @@ class PrimeText:
         print('Indexed comments')
 
 
-    def convertWordsToProduct(self,words):
+    def convertWordsToProduct(self,words, stem = False):
         output = 1
         for word in words:
-            word = self.st.stem(word).lower()
+            if stem:
+                word = self.st.stem(word).lower()
             if word in self.indexedDictionary:
                 output *= int(self.indexedDictionary[word])
         return output
@@ -79,6 +80,8 @@ class PrimeText:
 
     def find(self, words):
         prod = self.convertWordsToProduct(words)
+        if prod == 1:
+            return False
         return self.searchByPrimeFact(prod)
         
     def findInRecords(self, words):
