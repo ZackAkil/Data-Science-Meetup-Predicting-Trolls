@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sys
 import numpy as np
 from nltk.stem.lancaster import LancasterStemmer
@@ -17,9 +16,10 @@ class PrimeText:
     def cleanData(self,records):
          output = []
          recordsChecked = 0
+         recordsToCheck = len(records)
          for sentence in records:
              recordsChecked += 1
-             sys.stdout.write("\rRecords cleaned : %i" % recordsChecked)
+             sys.stdout.write("\rRecords cleaned : %i / %i" % (recordsChecked,recordsToCheck))
              cleanSentence = ''
              if len(sentence) < 200:
                  words = sentence.split(' ')
