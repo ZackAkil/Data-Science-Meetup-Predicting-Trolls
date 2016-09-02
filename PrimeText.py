@@ -13,11 +13,12 @@ class PrimeText:
     
     st = LancasterStemmer()   
     
-    def cleanData(self,records):
+    def cleanData(self,records, stemText = False):
          output = []
          recordsChecked = 0
          recordsToCheck = len(records)
          for sentence in records:
+             sentence = str(sentence)
              recordsChecked += 1
              sys.stdout.write("\rRecords cleaned : %i / %i" % (recordsChecked,recordsToCheck))
              cleanSentence = ''
@@ -26,7 +27,10 @@ class PrimeText:
                  for word in words:
                      if len(word) < 12:
                          if word.isalpha():
-                             cleanSentence += self.st.stem(spell(word.lower())) + ' '
+                             if stemText: 
+                                 cleanSentence += self.st.stem(spell(word.lower())) + ' '
+                             else:
+                                 cleanSentence += word.lower() + ' '
              if cleanSentence:
                  output.append(cleanSentence.strip())  
          sys.stdout.write("\n")

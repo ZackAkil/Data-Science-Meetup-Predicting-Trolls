@@ -31,7 +31,7 @@ def getComments(id,maxResults):
 
 def getPopularVideos(maxResults):
     vids = []
-    url = "https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+statistics&maxResults="+str(maxResults)+"&chart=mostPopular&regionCode=GB&key="+apiKey
+    url = "https://www.googleapis.com/youtube/v3/videos?part=snippet%2C+statistics&maxResults="+str(maxResults)+"&chart=mostPopular&regionCode=ES&key="+apiKey
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     for c in data['items']:
@@ -66,7 +66,7 @@ for v in vids:
 
 keys = commentData[0].keys()
 
-with open('utube.csv', 'w') as csvfile:
+with open('utubeES.csv', 'w') as csvfile:
 
     writer = csv.DictWriter(csvfile, fieldnames=keys)
 
