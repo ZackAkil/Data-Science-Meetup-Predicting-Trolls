@@ -1,18 +1,25 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
+  "name": "My Safe Space",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
+  "description": "Everyone likes me and thinks I'm great In my safe space. People don't judge me and haters don't hate In my safe space.",
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  },
   "homepage_url": "http://extensionizr.com",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/butters.png",
+    "48": "icons/butters.png",
+    "128": "icons/butters.png"
   },
   "default_locale": "en",
   "permissions": [
-    "https://www.youtube.com/"
+  "storage"
   ],
+  "browser_action": {
+    "default_icon": "icons/butters.png"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -20,8 +27,9 @@
       ],
       "js": [
         "js/jquery/jquery.min.js",
-        "src/inject/inject.js"      
-        ]
+        "src/inject/word scores.js",
+        "src/inject/inject.js"
+      ]
     }
   ]
 }
