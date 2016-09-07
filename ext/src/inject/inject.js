@@ -1,8 +1,5 @@
 chrome.extension.sendMessage({}, function(response) {
 
-	stopWords = {'commenting':1,
-				'great':5}
-
 	function huntTrolls(){
 		var comments = $('.comment-renderer-text-content');
       	comments.each(function() {
@@ -25,10 +22,10 @@ chrome.extension.sendMessage({}, function(response) {
 
 	function rateComment(comment){
 		var score = 0;
-		for (var word in stopWords) {
-		    if (stopWords.hasOwnProperty(word)) {
+		for (var word in wordScores) {
+		    if (wordScores.hasOwnProperty(word)) {
 		        if (comment.indexOf(word) !== -1)
-		        	score += stopWords[word]
+		        	score += wordScores[word]
 		    }
 		}
 		return score
