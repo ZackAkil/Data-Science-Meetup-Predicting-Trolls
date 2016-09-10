@@ -1,8 +1,14 @@
-chrome.extension.sendMessage({}, function(response) {
+// chrome.extension.sendMessage({}, function(response) {
 
 	function huntTrolls(){
+
 		var comments = $('.comment-renderer-text-content');
       	comments.each(function() {
+      		$(this)
+	  		.closest(".comment-renderer")
+	  		.parent()
+	  		.css("background-color", "beige");
+      		console.log($(this).text());
       		commentScore = rateComment($(this).text().toLowerCase());
       		if (commentScore > 0){
       			actionOnTrollComment(this,commentScore);
@@ -31,17 +37,31 @@ chrome.extension.sendMessage({}, function(response) {
 		return score
 	}
 
-	  function pollVisibility() {
+	 function pollVisibility() {
       if (!$(".action-panel-loading").is(":visible")) {
           // call a function here, or do whatever now that the div is not visible
 		  huntTrolls();
+		  pollInvisibility();
       } else {
           setTimeout(pollVisibility, 500);
       }
   	}
 
+  	function pollInvisibility() {
+      if ($(".action-panel-loading").is(":visible")) {
+          // call a function here, or do whatever now that the div is not visible
+		  pollVisibility();
+      } else {
+          setTimeout(pollInvisibility, 500);
+      }
+  	}
+
+
+
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
+
+		console.log("Video title err: "+ $('#eow-title').text());
 		clearInterval(readyStateCheckInterval);
 
 		// ----------------------------------------------------------
@@ -52,4 +72,12 @@ chrome.extension.sendMessage({}, function(response) {
 		pollVisibility();
 	}
 	}, 10);
-});
+
+	// $(window).hashchange("DOMSubtreeModified", function() {
+	// 	clearInterval(readyStateCheckInterval);
+	// 	console.log("Hello. This message was sent from update detection");
+ //    	alert("something has been changed on page, you should update href tag");
+	// });
+
+
+// });

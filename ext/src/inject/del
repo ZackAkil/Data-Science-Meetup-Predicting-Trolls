@@ -1,0 +1,12 @@
+def action(f):
+	print('did stuff')
+	f()
+
+def wave():
+	print('waving')
+
+def kick():
+	print('kick')
+
+
+action(kick)

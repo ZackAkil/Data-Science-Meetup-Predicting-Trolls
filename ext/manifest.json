@@ -1,5 +1,5 @@
 {
-  "name": "My Safe Space",
+  "name": "My Safe Space (Troll Filter)",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Everyone likes me and thinks I'm great In my safe space. People don't judge me and haters don't hate In my safe space.",
@@ -15,7 +15,9 @@
   },
   "default_locale": "en",
   "permissions": [
-  "storage"
+  "tabs",
+  "storage",
+  "http://www.youtube.com/*"
   ],
   "browser_action": {
     "default_icon": "icons/butters.png"
